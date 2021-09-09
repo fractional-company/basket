@@ -4,5 +4,5 @@
 . $(dirname $0)/common.sh
 
 # Deploy.
-GreeterAddr=$(deploy Greeter)
-log "Greeter deployed at:" $GreeterAddr
+FactoryAddr=$(deploy BasketFactory)
+log "Basket Factory deployed at:" $FactoryAddr
