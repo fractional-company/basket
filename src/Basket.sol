@@ -35,6 +35,14 @@ contract Basket is ERC721, IERC721Receiver, IERC1155Receiver {
     /// @notice withdraw an ERC721 token from this contract into your wallet
     /// @param _token the address of the NFT you are withdrawing
     /// @param _tokenId the ID of the NFT you are withdrawing
+    function withdrawERC721Unsafe(address _token, uint256 _tokenId) external {
+        require(_isApprovedOrOwner(msg.sender, 0), "withdraw:not allowed");
+        IERC721(_token).transferFrom(address(this), msg.sender, _tokenId);
+        emit WithdrawERC721(_token, _tokenId, msg.sender);
+    }
+    /// @notice withdraw an ERC721 token from this contract into your wallet
+    /// @param _token the address of the NFT you are withdrawing
+    /// @param _tokenId the ID of the NFT you are withdrawing
     /// @param _amount the amount of the NFT you are withdrawing
     function withdrawERC1155(address _token, uint256 _tokenId, uint256 _amount) external {
         require(_isApprovedOrOwner(msg.sender, 0), "withdraw:not allowed");
