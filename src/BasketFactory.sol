@@ -9,11 +9,13 @@ contract BasketFactory {
     
     event NewBasket(address indexed _address, address indexed _creator);
     
-    function createBasket() public {
+    function createBasket() public returns(address) {
         Basket basket = new Basket();
         basket.transferFrom(address(this), msg.sender, 0);
         baskets.push(address(basket));
         emit NewBasket(address(basket), msg.sender);
+
+        return address(basket);
     }
     
 }
